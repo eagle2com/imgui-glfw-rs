@@ -167,7 +167,9 @@ impl ImguiGLFW {
             }
             WindowEvent::Key(key, _, action, modifier) => {
                 Self::set_mod(imgui, modifier);
-                imgui.io_mut().keys_down[key as usize] = action != Action::Release;
+                if key as i32 >= 0 {
+                    imgui.io_mut().keys_down[key as usize] = action != Action::Release;
+                }
             }
             _ => {}
         }
